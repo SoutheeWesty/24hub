@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ATC24 Hub Live</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="hero">
+      <div class="hero-top">
+        <div>
+          <h1>ATC24 Hub</h1>
+          <p class="subtitle">Live pilot and ATC intelligence for main and event servers.</p>
+        </div>
+        <button id="loginButton" class="button-primary">Login</button>
+      </div>
+      <div class="chips">
+        <span id="wsStatus" class="chip">WS: connecting</span>
+        <span id="restStatus" class="chip">REST: waiting</span>
+        <span id="userStatus" class="chip">Not logged in</span>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section id="authPanel" class="card auth hidden" aria-live="polite">
+        <h2>Login</h2>
+        <form id="loginForm">
+          <input id="displayName" placeholder="Display Name" required />
+          <select id="role" required>
+            <option value="">Select Role</option>
+            <option value="player">Player</option>
+            <option value="controller">Controller</option>
+            <option value="ground">Ground Crew</option>
+            <option value="viewer">Viewer</option>
+          </select>
+          <button type="submit">Start Session</button>
+        </form>
+      </section>
+
+      <section id="workspacePanel" class="card hidden">
+        <h2 id="softwareTitle">Role Software</h2>
+        <p id="workspaceIntro" class="subtitle"></p>
+
+        <div class="software-shell">
+          <aside class="software-menu" id="softwareMenu"></aside>
+          <div class="software-content">
+            <section id="controllerWorkspace" class="role-workspace hidden">
+              <article class="role-card">
+                <h3>Controller Core</h3>
+                <ul>
+                  <li>Radar & scope workspace</li>
+                  <li>Live strip/queue overview</li>
+                  <li>Handoff and traffic sequencing</li>
+                </ul>
+              </article>
+              <article class="role-card">
+                <h3>PDC Builder (ATC)</h3>
+                <form id="pdcForm">
+                  <input id="pdcCallsign" placeholder="Callsign" required />
+                  <input id="pdcDeparture" placeholder="Departure ICAO" required />
+                  <input id="pdcArrival" placeholder="Arrival ICAO" required />
+                  <input id="pdcSquawk" placeholder="Squawk" required />
+                  <button type="submit">Generate PDC</button>
+                </form>
+                <pre id="pdcOutput" class="output">No PDC generated yet.</pre>
+              </article>
+            </section>
+
+            <section id="groundWorkspace" class="role-workspace hidden">
+              <article class="role-card">
+                <h3>Ground Crew Console</h3>
+                <ul>
+                  <li>Turnaround checklist</li>
+                  <li>Stand assignment and pushback readiness</li>
+                  <li>Fuel/catering/baggage status tracking</li>
+                </ul>
+              </article>
+              <article class="role-card">
+                <h3>Ground Tasks</h3>
+                <ul id="groundTasks">
+                  <li>Chocks set</li>
+                  <li>Fuel connected</li>
+                  <li>Baggage loaded</li>
+                  <li>Cabin secured</li>
+                </ul>
+              </article>
+            </section>
+
+            <section id="playerWorkspace" class="role-workspace hidden">
+              <article class="role-card">
+                <h3>Pilot Software</h3>
+                <ul>
+                  <li>Route and performance planning</li>
+                  <li>IFR/VFR request prep</li>
+                  <li>ATIS and controller awareness panel</li>
+                </ul>
+              </article>
+            </section>
+
+            <section id="viewerWorkspace" class="role-workspace hidden">
+              <article class="role-card">
+                <h3>Viewer Software</h3>
+                <p>Observer mode: track flights, controller activity, and weather/ATIS changes in real time.</p>
+              </article>
+            </section>
+          </div>
+        </div>
+      </section>
+
+      <section class="card metrics">
+        <h2>Live Metrics</h2>
+        <div class="metric-grid">
+          <div><p>Main Aircraft</p><strong id="mainAircraftCount">0</strong></div>
+          <div><p>Event Aircraft</p><strong id="eventAircraftCount">0</strong></div>
+          <div><p>Controllers</p><strong id="controllersCount">0</strong></div>
+          <div><p>ATIS Entries</p><strong id="atisCount">0</strong></div>
+        </div>
+      </section>
+
+      <section class="card checker">
+        <h2>Controller Verification</h2>
+        <form id="controllerForm">
+          <input id="discordId" placeholder="Discord ID" required />
+          <button type="submit">Check</button>
+        </form>
+        <p id="controllerResult">No check yet.</p>
+      </section>
+
+      <section class="card split">
+        <div>
+          <h2>Main Flight Plans (WS)</h2>
+          <ul id="flightPlansMain"></ul>
+        </div>
+        <div>
+          <h2>Event Flight Plans (WS)</h2>
+          <ul id="flightPlansEvent"></ul>
+        </div>
+      </section>
+
+      <section class="card split">
+        <div>
+          <h2>Controllers</h2>
+          <ul id="controllers"></ul>
+        </div>
+        <div>
+          <h2>ATIS</h2>
+          <ul id="atis"></ul>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>System Events</h2>
+        <ul id="events"></ul>
+      </section>
+    </main>
+
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>

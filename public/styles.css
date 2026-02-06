@@ -1,0 +1,52 @@
+:root {
+  --bg: #061021;
+  --panel: #0f1d33;
+  --border: #2c4063;
+  --text: #e8f0ff;
+  --muted: #9bb0d4;
+  --accent: #5eb4ff;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Inter, system-ui, sans-serif;
+  background: radial-gradient(circle at top left, #153a72, var(--bg));
+  color: var(--text);
+}
+.hero, .layout { width: min(1200px, 94vw); margin: 0 auto; }
+.hero { padding: 2rem 0 1rem; }
+.hero-top { display: flex; align-items: center; justify-content: space-between; gap: .8rem; flex-wrap: wrap; }
+h1 { margin: 0; font-size: clamp(2rem, 5vw, 3rem); }
+.subtitle { color: var(--muted); margin-bottom: .8rem; }
+.chips { display: flex; gap: .6rem; flex-wrap: wrap; }
+.chip { padding: .35rem .6rem; border: 1px solid var(--border); border-radius: 999px; color: var(--muted); }
+.layout { display: grid; gap: 1rem; padding-bottom: 2rem; }
+.card {
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--panel) 88%, black);
+  border-radius: 14px;
+  padding: 1rem;
+}
+.hidden { display: none !important; }
+.metric-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap: .7rem; }
+.metric-grid p { margin: 0; color: var(--muted); }
+.metric-grid strong { font-size: 1.4rem; }
+form { display: flex; gap: .5rem; flex-wrap: wrap; }
+input, button, select {
+  border-radius: 8px; border: 1px solid var(--border);
+  padding: .55rem .7rem; background: #0b1424; color: var(--text);
+}
+button, .button-primary { background: linear-gradient(135deg, var(--accent), #3f68ff); border: none; font-weight: 700; cursor: pointer; }
+.split { display: grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); gap: 1rem; }
+.software-shell { display: grid; grid-template-columns: 230px 1fr; gap: 1rem; }
+.software-menu { display: grid; align-content: start; gap: .5rem; }
+.module-chip { text-align: left; background: #10203a; border: 1px solid var(--border); }
+.software-content { min-height: 160px; }
+.role-workspace { display: grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); gap: 1rem; }
+.role-card { border: 1px solid var(--border); border-radius: 10px; padding: .8rem; background: #0c1629; }
+.output { white-space: pre-wrap; margin: 0; padding: .7rem; border: 1px dashed var(--border); border-radius: 10px; background: #09101d; }
+ul { margin: 0; padding-left: 1rem; max-height: 240px; overflow: auto; }
+li + li { margin-top: .35rem; }
+@media (max-width: 900px) {
+  .software-shell { grid-template-columns: 1fr; }
+}
