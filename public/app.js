@@ -34,7 +34,10 @@ const els = {
   pdcCallsign: $('pdcCallsign'),
   pdcDeparture: $('pdcDeparture'),
   pdcArrival: $('pdcArrival'),
-  pdcSquawk: $('pdcSquawk')
+  pdcSquawk: $('pdcSquawk'),
+  scopeButtons: $('scopeButtons'),
+  scopePreview: $('scopePreview'),
+  scopeCaption: $('scopeCaption')
 };
 
 const roleSoftware = {
@@ -42,6 +45,12 @@ const roleSoftware = {
   ground: ['Turnaround', 'Stand Ops', 'Pushback', 'Service Board'],
   player: ['Flight Plan', 'Briefing', 'ATIS Monitor', 'Nav Tools'],
   viewer: ['Live Map', 'Traffic Feed', 'Controller Feed', 'ATIS Board']
+};
+
+const scopeDescriptions = {
+  tower: 'Tower Scope: final + immediate pattern traffic.',
+  approach: 'Approach Scope: arrival streams and sequencing outside the pattern.',
+  ground: 'Ground Scope: apron and taxi movement awareness.'
 };
 
 function listReplace(target, items) {
@@ -62,6 +71,17 @@ function roleLabel(role) {
   return role === 'controller' ? 'Controller' : role === 'ground' ? 'Ground Crew' : role === 'player' ? 'Player' : 'Viewer';
 }
 
+function setScopeView(scope) {
+  if (!els.scopePreview || !els.scopeCaption || !els.scopeButtons) return;
+
+  els.scopePreview.className = `scope-preview ${scope}`;
+  els.scopeCaption.textContent = scopeDescriptions[scope] || scopeDescriptions.tower;
+
+  for (const button of els.scopeButtons.querySelectorAll('.scope-view-btn')) {
+    button.classList.toggle('active', button.dataset.scope === scope);
+  }
+}
+
 function showRoleSoftware(role) {
   setVisible(els.workspacePanel, true);
   setVisible(els.controllerWorkspace, role === 'controller');
@@ -77,6 +97,10 @@ function showRoleSoftware(role) {
     moduleChip.className = 'module-chip';
     moduleChip.textContent = moduleName;
     els.softwareMenu.appendChild(moduleChip);
+  }
+
+  if (role === 'controller') {
+    setScopeView('tower');
   }
 
   els.workspacePanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -174,6 +198,12 @@ els.loginForm.addEventListener('submit', (event) => {
   const session = { displayName, role, loggedInAt: new Date().toISOString() };
   localStorage.setItem('atc24_session', JSON.stringify(session));
   applySession(session);
+});
+
+els.scopeButtons?.addEventListener('click', (event) => {
+  const button = event.target.closest('.scope-view-btn');
+  if (!button?.dataset.scope) return;
+  setScopeView(button.dataset.scope);
 });
 
 els.pdcForm?.addEventListener('submit', (event) => {

@@ -44,6 +44,58 @@ button, .button-primary { background: linear-gradient(135deg, var(--accent), #3f
 .software-content { min-height: 160px; }
 .role-workspace { display: grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); gap: 1rem; }
 .role-card { border: 1px solid var(--border); border-radius: 10px; padding: .8rem; background: #0c1629; }
+.scope-card { display: grid; gap: .65rem; }
+.scope-buttons { display: flex; flex-wrap: wrap; gap: .45rem; }
+.scope-view-btn { background: #10203a; border: 1px solid var(--border); }
+.scope-view-btn.active { border-color: #7ad2ff; box-shadow: 0 0 0 1px #7ad2ff inset; }
+.scope-preview {
+  position: relative;
+  height: 190px;
+  border: 1px solid #2f5a85;
+  border-radius: 12px;
+  overflow: hidden;
+  background: radial-gradient(circle at center, #173d64 0%, #0a1525 68%);
+}
+.scope-ring {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  left: calc(50% - 60px);
+  top: calc(50% - 60px);
+  border: 1px solid rgba(130, 198, 255, 0.45);
+  border-radius: 50%;
+}
+.ring-2 { width: 174px; height: 174px; left: calc(50% - 87px); top: calc(50% - 87px); }
+.scope-track {
+  position: absolute;
+  font-size: .72rem;
+  color: #ccf2ff;
+  background: rgba(4, 14, 25, 0.72);
+  border: 1px solid rgba(122, 210, 255, .55);
+  padding: .18rem .35rem;
+  border-radius: 6px;
+}
+.scope-runway {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: .7rem;
+  letter-spacing: .08em;
+  color: #7ad2ff;
+}
+.t1 { top: 22%; left: 17%; }
+.t2 { top: 48%; right: 12%; }
+.t3 { bottom: 24%; left: 34%; }
+.scope-preview.approach .t1 { top: 14%; left: 12%; }
+.scope-preview.approach .t2 { top: 36%; right: 8%; }
+.scope-preview.approach .t3 { bottom: 16%; left: 48%; }
+.scope-preview.ground .scope-ring { display: none; }
+.scope-preview.ground .scope-runway { left: 14px; transform: none; bottom: 12px; }
+.scope-preview.ground .t1 { top: 20%; left: 14%; }
+.scope-preview.ground .t2 { top: 58%; right: 10%; }
+.scope-preview.ground .t3 { bottom: 18%; left: 22%; }
+.scope-caption { color: var(--muted); margin: 0; font-size: .9rem; }
 .output { white-space: pre-wrap; margin: 0; padding: .7rem; border: 1px dashed var(--border); border-radius: 10px; background: #09101d; }
 ul { margin: 0; padding-left: 1rem; max-height: 240px; overflow: auto; }
 li + li { margin-top: .35rem; }

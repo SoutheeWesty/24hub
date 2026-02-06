@@ -54,6 +54,24 @@
                   <li>Handoff and traffic sequencing</li>
                 </ul>
               </article>
+              <article class="role-card scope-card">
+                <h3>Scope Views</h3>
+                <p class="subtitle">Pick a scope profile to see the style before you control.</p>
+                <div class="scope-buttons" id="scopeButtons">
+                  <button type="button" class="scope-view-btn active" data-scope="tower">Tower Scope</button>
+                  <button type="button" class="scope-view-btn" data-scope="approach">Approach Scope</button>
+                  <button type="button" class="scope-view-btn" data-scope="ground">Ground Scope</button>
+                </div>
+                <div id="scopePreview" class="scope-preview tower">
+                  <div class="scope-ring"></div>
+                  <div class="scope-ring ring-2"></div>
+                  <div class="scope-track t1">AAL231 · 2800ft</div>
+                  <div class="scope-track t2">RYR52 · 3600ft</div>
+                  <div class="scope-track t3">DAL19 · 1200ft</div>
+                  <div class="scope-runway">RWY 27</div>
+                </div>
+                <p id="scopeCaption" class="scope-caption">Tower Scope: final + immediate pattern traffic.</p>
+              </article>
               <article class="role-card">
                 <h3>PDC Builder (ATC)</h3>
                 <form id="pdcForm">
